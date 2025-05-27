@@ -34,8 +34,8 @@
         /* Column 1: Song Info */
         .song-info-column {
             width: 8%;
-            padding: 20px 10px;
- display: flex;
+            padding: 20px 10px; 
+            display: flex;
             flex-direction: column;
             justify-content: flex-end;
             text-align: center;
@@ -45,11 +45,11 @@
             font-size: 1.6em;
             font-weight: bold;
             margin-bottom: 10px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
- writing-mode: vertical-rl;
- text-orientation: mixed;
- transform: rotate(180deg);
- flex-grow: 1;
+            flex-grow: 1;
             display: flex;
             align-items: flex-end;
             justify-content: center;
@@ -57,12 +57,12 @@
 
         .song-artist {
             /* Restore vertical display */
-            font-size: 1.1em;
+ font-size: 1.1em;
             opacity: 0.8;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
- writing-mode: vertical-rl;
- text-orientation: mixed;
- transform: rotate(180deg);
         }
 
         /* Column 2: Controls */
@@ -119,9 +119,9 @@
         }
 
         .progress-bar {
- width: 150px; /* Vertical length */
- height: 12px; /* Horizontal thickness - slightly thicker */
- background-color: rgba(255, 255, 255, 0.1); /* More subtle background */
+            width: 150px; /* Vertical length */
+            height: 12px; /* Horizontal thickness - slightly thicker */
+            background-color: rgba(255, 255, 255, 0.1); /* More subtle background */
             overflow: hidden;
         }
 
