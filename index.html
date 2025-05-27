@@ -114,9 +114,9 @@
             transform: rotate(90deg);
             transform-origin: center;
             height: 150px; /* Adjust based on desired vertical height */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; /* Use flexbox to align children */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
             justify-content: center;
         }
 
@@ -135,13 +135,11 @@
         }
 
         .time-display {
-             transform: rotate(-90deg); /* Counter-rotate time display */
-             margin-top: 10px;
-             width: 100px; /* Adjust width as needed */
+             transform: rotate(-90deg); /* Counter-rotate time display back to horizontal */
+             margin-top: 15px; /* Add space between time and progress bar */
+             width: 100px; /* Keep width as needed */
              display: flex;
              justify-content: space-between;
-             font-size: 14px;
-             opacity: 0.8;
         }
 
 
@@ -199,7 +197,6 @@
             column-count: 2;
             column-gap: 30px;
             column-rule: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 16px;
             line-height: 1.6;
  text-align: justify;
         .lyrics-content::-webkit-scrollbar {
