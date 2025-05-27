@@ -157,8 +157,7 @@
         /* Column 3: Lyrics */
         .lyrics-column {
             width: 75%;
-            padding: 20px;
-            overflow: hidden;
+            padding: 20px; /* Removed overflow: hidden; */
             position: relative;
         }
 
@@ -191,15 +190,19 @@
         }
 
         .lyrics-content {
-            height: calc(100% - 80px);
+            height: calc(100% - 80px); /* Keep existing height calculation */
             overflow-y: auto;
             column-count: 2;
             column-gap: 30px;
             column-rule: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 16px;
+            font-size: 16px; /* Base font size */
             line-height: 1.6;
             text-align: justify;
             padding-right: 10px;
+        }
+
+        .lyrics-content pre {
+            white-space: pre-wrap; /* Ensure line breaks and wrapping are preserved */
         }
 
         .lyrics-content::-webkit-scrollbar {
