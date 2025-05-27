@@ -487,7 +487,9 @@
                 }
             } catch (error) {
                 console.error('Error fetching lyrics file:', error);
-                lyricsContent.innerHTML = `<div class="no-lyrics">Error loading lyrics: ${error.message}</div>`;
+                // Split lyrics by newline and wrap each line in a <p> tag
+                const lines = lyrics.split(/\r?\n/);
+                lyricsContent.innerHTML = lines.map(line => `<p>${line}</p>`).join('');
             }
         }
 
