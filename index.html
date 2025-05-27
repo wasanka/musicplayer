@@ -24,8 +24,8 @@
 
         .container {
             display: flex;
- width: 100vw;
- height: 100vh;
+            width: 100vw;
+            height: 100vh;
             background-color: rgba(32, 32, 56, 0.7); /* Slightly lighter dark background with transparency */
             backdrop-filter: blur(15px);
             box-sizing: border-box;
@@ -58,7 +58,7 @@
 
         .song-artist {
             /* Restore vertical display */
- font-size: 1.1em;
+            font-size: 1.1em;
             opacity: 0.8;
             writing-mode: vertical-rl;
             text-orientation: mixed;
@@ -114,9 +114,9 @@
             transform: rotate(90deg);
             transform-origin: center;
             height: 150px; /* Adjust based on desired vertical height */
-            display: flex; /* Use flexbox to align children */
-            flex-direction: column; /* Stack items vertically */
-            align-items: center; /* Center items horizontally */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
         }
 
@@ -131,17 +131,18 @@
             height: 100%;
             background: linear-gradient(90deg, #ff6b6b, #feca57);
             width: 0%;
- transition: width 0.3s ease; /* Smoother transition */
+            transition: width 0.3s ease; /* Smoother transition */
         }
 
         .time-display {
-             transform: rotate(-90deg); /* Counter-rotate time display back to horizontal */
-             margin-top: 15px; /* Add space between time and progress bar */
-             width: 100px; /* Keep width as needed */
+             transform: rotate(-90deg); /* Counter-rotate time display */
+             margin-top: 10px;
+             width: 100px; /* Adjust width as needed */
              display: flex;
              justify-content: space-between;
+             font-size: 14px;
+             opacity: 0.8;
         }
-
 
         .volume-control {
             display: flex;
@@ -197,8 +198,11 @@
             column-count: 2;
             column-gap: 30px;
             column-rule: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
             line-height: 1.6;
- text-align: justify;
+            text-align: justify;
+        }
+        
         .lyrics-content::-webkit-scrollbar {
             width: 8px;
         }
