@@ -24,20 +24,17 @@
 
         .container {
             display: flex;
-            width: 100vw;
-            height: 100vh;
+ width: 100vw;
+ height: 100vh;
             background-color: rgba(32, 32, 56, 0.7); /* Slightly lighter dark background with transparency */
             backdrop-filter: blur(15px);
-            box-sizing: border-box;
-            flex-direction: row;
             overflow: hidden;
         }
 
         /* Column 1: Song Info */
         .song-info-column {
             width: 8%;
-            width: 15%;
-            padding: 20px 10px; 
+            padding: 20px 10px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -59,7 +56,6 @@
         }
 
         .song-artist {
-            /* Restore vertical display */
             font-size: 1.1em;
             opacity: 0.8;
             writing-mode: vertical-rl;
@@ -70,10 +66,10 @@
 
         /* Column 2: Controls */
         .controls-column {
-            width: 25%;
+            width: 15%;
             padding: 20px 15px;
             display: flex;
-            box-sizing: border-box;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -122,9 +118,9 @@
         }
 
         .progress-bar {
-            width: 150px; /* Vertical length */
-            height: 12px; /* Horizontal thickness - slightly thicker */
-            background-color: rgba(255, 255, 255, 0.1); /* More subtle background */
+ width: 150px; /* Vertical length */
+ height: 12px; /* Horizontal thickness - slightly thicker */
+ background-color: rgba(255, 255, 255, 0.1); /* More subtle background */
             overflow: hidden;
         }
 
@@ -132,7 +128,7 @@
             height: 100%;
             background: linear-gradient(90deg, #ff6b6b, #feca57);
             width: 0%;
-            transition: width 0.3s ease; /* Smoother transition */
+ transition: width 0.3s ease; /* Smoother transition */
         }
 
         .time-display {
@@ -144,6 +140,7 @@
              font-size: 14px;
              opacity: 0.8;
         }
+
 
         .volume-control {
             display: flex;
@@ -159,9 +156,9 @@
 
         /* Column 3: Lyrics */
         .lyrics-column {
-            width: 60%;
+            width: 75%;
             padding: 20px;
-            display: flex;
+            overflow: hidden;
             position: relative;
         }
 
@@ -194,7 +191,7 @@
         }
 
         .lyrics-content {
-            flex-grow: 1;
+            height: calc(100% - 80px);
             overflow-y: auto;
             column-count: 2;
             column-gap: 30px;
@@ -202,8 +199,9 @@
             font-size: 16px;
             line-height: 1.6;
             text-align: justify;
+            padding-right: 10px;
         }
-        
+
         .lyrics-content::-webkit-scrollbar {
             width: 8px;
         }
@@ -482,7 +480,8 @@
                 if (response.ok) {
                     const lyrics = await response.text();
                     // Simple newline to break conversion
-                    lyricsContent.innerHTML = `<pre>${lyrics}</pre>`;
+
+                    lyricsContent.innerHTML = `<div>${lyrics.replace(/\\r\\n|\\n|\\r/g, '<br>')}</div>`;
                 } else {
                     console.warn(`Lyrics file not found or failed to load: ./lyrics/${lyricsFile}`);
                     lyricsContent.innerHTML = `<div class="no-lyrics">Lyrics not found for this song (${lyricsFile})</div>`;
