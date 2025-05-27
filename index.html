@@ -158,7 +158,6 @@
         .lyrics-column {
             width: 75%;
             padding: 20px;
-            overflow: hidden;
             position: relative;
         }
 
@@ -193,6 +192,7 @@
         .lyrics-content {
             height: calc(100% - 80px);
             overflow-y: auto;
+            white-space: pre-wrap;
             column-count: 2;
             column-gap: 30px;
             column-rule: 1px solid rgba(255, 255, 255, 0.2);
@@ -479,8 +479,7 @@
                 const response = await fetch(`./lyrics/${lyricsFile}`);
                 if (response.ok) {
                     const lyrics = await response.text();
-                    // Simple newline to break conversion
-
+                    // Simple newline to break conversion and replace backslashes
                     lyricsContent.innerHTML = `<div>${lyrics.replace(/\\r\\n|\\n|\\r/g, '<br>')}</div>`;
                 } else {
                     console.warn(`Lyrics file not found or failed to load: ./lyrics/${lyricsFile}`);
