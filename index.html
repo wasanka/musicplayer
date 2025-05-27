@@ -75,7 +75,8 @@
         }
 
         .audio-controls {
- display: grid; /* Use grid for more flexible layout */
+            display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 25px;
             width: 100%;
@@ -105,17 +106,29 @@
         }
 
         .progress-container {
-            grid-column: 1 / -1; /* Span across all columns in the grid */
+            width: 100%;
             margin: 20px 0;
- width: 100%; /* Take full width of the controls column */
- height: 12px; /* Adjust height as needed */
+            transform: rotate(90deg);
+            transform-origin: center;
+            height: 150px; /* Adjust based on desired vertical height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .progress-bar {
-            width: 100%;
- height: 100%;
- background-color: rgba(255, 255, 255, 0.15);
+ width: 150px; /* Vertical length */
+ height: 12px; /* Horizontal thickness - slightly thicker */
+ background-color: rgba(255, 255, 255, 0.1); /* More subtle background */
             overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #feca57);
+            width: 0%;
+ transition: width 0.3s ease; /* Smoother transition */
         }
 
         .time-display {
@@ -127,13 +140,6 @@
              font-size: 14px;
              opacity: 0.8;
         }
-
- .progress {
- height: 100%;
- background: linear-gradient(90deg, #ff6b6b, #feca57);
- width: 0%;
- transition: width 0.3s ease;
- }
 
 
         .volume-control {
@@ -303,6 +309,7 @@
                     createShuffledPlaylist();
                     setupEventListeners();
                     updateZoom();
+                    loadSong(0); // Load the first song in the shuffled playlist
  adjustLyricsFontSize(); // Adjust lyrics font size after loading
                     // Attempt to autoplay, but be mindful of browser restrictions
                     const playPromise = audioPlayer.play();
@@ -345,7 +352,7 @@
         // Load songs configuration from songs.json
         async function loadSongsConfig() {
             try {
-                const response = await fetch('./songs.json');
+                const response = await fetch('./songs.json', { mode: 'no-cors'});
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -471,7 +478,8 @@
             try {
                 const response = await fetch(`./lyrics/${lyricsFile}`);
                 if (response.ok) {
-                    let lyrics = await response.text();
+                    const lyrics = await response.text();
+                    // Simple newline to break conversion
 
                     lyricsContent.innerHTML = `<div>${lyrics.replace(/\\r\\n|\\n|\\r/g, '<br>')}</div>`;
                 } else {
