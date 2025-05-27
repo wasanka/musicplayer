@@ -156,12 +156,19 @@
 
         /* Column 3: Lyrics */
         .lyrics-column {
-            width: 60%;
+            width: 75%;
             padding: 20px;
             overflow: hidden;
             position: relative;
- display: flex;
- flex-direction: column;
+        }
+
+        .lyrics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .zoom-controls {
@@ -184,15 +191,17 @@
         }
 
         .lyrics-content {
-            flex-grow: 1;
+            height: calc(100% - 80px);
             overflow-y: auto;
-            column-count: 2; /* Added back column-count */
-            column-gap: 30px; /* Added back column-gap */
-            column-rule: 1px solid rgba(255, 255, 255, 0.2); /* Added back column-rule */
+            column-count: 2;
+            column-gap: 30px;
+            column-rule: 1px solid rgba(255, 255, 255, 0.2);
             font-size: 16px;
             line-height: 1.6;
             text-align: justify;
             padding-right: 10px;
+        }
+
         .lyrics-content::-webkit-scrollbar {
             width: 8px;
         }
@@ -235,7 +244,7 @@
                         <div class="progress" id="progress"></div>
                     </div>
                     <div class="time-display">
- <span id="currentTime">0:00</span>
+                        <span id="currentTime">0:00</span>
                         <span id="duration">0:00</span>
                     </div>
                 </div>
@@ -249,12 +258,6 @@
 
         <!-- Column 3: Lyrics -->
         <div class="lyrics-column">
-            <div class="lyrics-header">
-                <div class="time-display">
-                    <span id="currentTime">0:00</span>
-                    <span id="duration">0:00</span>
-                </div>
-            </div>
             <div class="lyrics-header">
                 <h3>Lyrics</h3>
                 <div class="zoom-controls">
@@ -477,8 +480,8 @@
                 if (response.ok) {
                     const lyrics = await response.text();
                     // Simple newline to break conversion
-                    lyrics = lyrics.replace(/\r\n|\n|\r/g, '\n');
-                    lyricsContent.innerHTML = `<pre>${lyrics}</pre>`;
+
+                    lyricsContent.innerHTML = `<div>${lyrics.replace(/\\r\\n|\\n|\\r/g, '<br>')}</div>`;
                 } else {
                     console.warn(`Lyrics file not found or failed to load: ./lyrics/${lyricsFile}`);
                     lyricsContent.innerHTML = `<div class="no-lyrics">Lyrics not found for this song (${lyricsFile})</div>`;
