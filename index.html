@@ -481,7 +481,7 @@
                     const lyrics = await response.text();
                     // Simple newline to break conversion
 
-                    lyricsContent.innerHTML = `<div>${lyrics.replace(/\\r\\n|\\n|\\r/g, '<br>')}</div>`;
+                    lyricsContent.innerHTML = `<div>${lyrics.replace(/\r\n|\n|\r/g, '<br>')}</div>`;
                 } else {
                     console.warn(`Lyrics file not found or failed to load: ./lyrics/${lyricsFile}`);
                     lyricsContent.innerHTML = `<div class="no-lyrics">Lyrics not found for this song (${lyricsFile})</div>`;
