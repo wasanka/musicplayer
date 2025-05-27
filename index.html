@@ -33,7 +33,7 @@
 
         /* Column 1: Song Info */
         .song-info-column {
-            width: 15%;
+            width: 8%;
             padding: 20px 10px;
  display: flex;
             flex-direction: column;
@@ -46,6 +46,9 @@
             font-weight: bold;
             margin-bottom: 10px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+ writing-mode: vertical-rl;
+ text-orientation: mixed;
+ transform: rotate(180deg);
  flex-grow: 1;
             display: flex;
             align-items: flex-end;
@@ -53,9 +56,13 @@
         }
 
         .song-artist {
+            /* Restore vertical display */
             font-size: 1.1em;
             opacity: 0.8;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+ writing-mode: vertical-rl;
+ text-orientation: mixed;
+ transform: rotate(180deg);
         }
 
         /* Column 2: Controls */
@@ -150,7 +157,7 @@
 
         /* Column 3: Lyrics */
         .lyrics-column {
-            width: 60%;
+            width: 75%;
             padding: 20px;
             overflow: hidden;
             position: relative;
