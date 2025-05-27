@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'nirmala-ui';
+    /* Replace with your font's family name */
+    src: url('./nirmala-ui.ttf') format('truetype');
+    /* Replace with the correct path and format */
+    /* Add other styles like font-weight, font-style, etc. */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-fluid {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(32, 32, 56, 0.7);
+    /* Slightly lighter dark background with transparency */
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+}
+
+.main-layout {
+    width: 100%;
+    height: 100vh;
+}
+
+table {
+    border-collapse: collapse;
+    /* Important for a clean look */
+}
+
+td {
+    text-align: center;
+    border: 1px solid black;
+    /* Defines the border */
+    padding: 8px;
+    /* Adds spacing within the cell */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* Adds the shadow */
+}
+
+.song-artist {
+    font-size: 2em;
+    opacity: 0.8;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
