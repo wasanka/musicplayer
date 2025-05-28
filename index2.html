@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a2e; /* Darker background */
+            color: #e0e0e0; /* Lighter text for contrast */
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+ width: 100vw;
+ height: 100vh;
+            background-color: rgba(32, 32, 56, 0.7); /* Slightly lighter dark background with transparency */
+            backdrop-filter: blur(15px);
+            overflow: hidden;
+        }
+
+        /* Column 1: Song Info */
+        .song-info-column {
+            width: 8%;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-align: center;
+        }
+
+        .song-title {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .song-artist {
+            font-size: 1.1em;
+            opacity: 0.8;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Column 2: Controls */
+        .controls-column {
+            width: 15%;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .audio-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 55px;
+            height: 55px;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .play-btn {
+            width: 75px;
+            height: 75px;
+            font-size: 30px;
+        }
+
+        .progress-container {
+            width: 100%;
+            margin: 20px 0;
+            transform: rotate(90deg);
+            transform-origin: center;
+            height: 150px; /* Adjust based on desired vertical height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-bar {
+ width: 150px; /* Vertical length */
+ height: 12px; /* Horizontal thickness - slightly thicker */
+ background-color: rgba(255, 255, 255, 0.1); /* More subtle background */
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #feca57);
+            width: 0%;
+ transition: width 0.3s ease; /* Smoother transition */
+        }
+
+        .time-display {
+             transform: rotate(-90deg); /* Counter-rotate time display */
+             margin-top: 10px;
+             width: 100px; /* Adjust width as needed */
+             display: flex;
+             justify-content: space-between;
+             font-size: 14px;
+             opacity: 0.8;
+        }
+
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            transform-origin: center;
+        }
+
+        .volume-slider {
+            width: 80px;
+        }
+
+        /* Column 3: Lyrics */
+        .lyrics-column {
+            width: 75%;
+            padding: 20px;
+            position: relative;
+        }
+
+        .lyrics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .zoom-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .zoom-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 8px 12px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .zoom-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .lyrics-content {
+            height: calc(100% - 80px);
+            overflow-y: auto;
+            white-space: pre-wrap;
+            column-count: 2;
+            column-gap: 30px;
+            column-rule: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: justify;
+            padding-right: 10px;
+        }
+
+        .lyrics-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .lyrics-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lyrics-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .no-lyrics {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            opacity: 0.6;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Column 1: Song Info -->
+        <div class="song-info-column">
+            <div class="song-title" id="songTitle">Loading...</div>
+            <div class="song-artist" id="songArtist"></div>
+        </div>
+
+        <!-- Column 2: Controls -->
+        <div class="controls-column">
+            <div class="audio-controls">
+                <button class="control-btn" id="prevBtn">⏮</button>
+                <button class="control-btn play-btn" id="playBtn">▶</button>
+                <button class="control-btn" id="nextBtn">⏭</button>
+
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress" id="progress"></div>
+                    </div>
+                    <div class="time-display">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                </div>
+
+                <div class="volume-control">
+                    <span>🔊</span>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
+                </div>
+            </div>
+        </div>
+
+        <!-- Column 3: Lyrics -->
+        <div class="lyrics-column">
+            <div class="lyrics-header">
+                <h3>Lyrics</h3>
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoomOut">A-</button>
+                    <button class="zoom-btn" id="zoomReset">A</button>
+                    <button class="zoom-btn" id="zoomIn">A+</button>
+                </div>
+            </div>
+            <div class="lyrics-content" id="lyricsContent">
+                <div class="no-lyrics">Loading songs...</div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer" preload="metadata"></audio>
+
+    <script>
+        // Configuration will be loaded from songs.json
+        let songsConfig = [];
+
+        // App state
+        let currentSongIndex = -1; // Index in the shuffled playlist
+        let isPlaying = false;
+        let currentZoom = 16; // Base font size for lyrics
+        let shuffledPlaylist = []; // Array of indices in the random order
+
+        // DOM elements
+        const audioPlayer = document.getElementById('audioPlayer');
+        const songTitle = document.getElementById('songTitle');
+        const songArtist = document.getElementById('songArtist');
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progress = document.getElementById('progress');
+        const currentTime = document.getElementById('currentTime');
+        const duration = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const lyricsContent = document.getElementById('lyricsContent');
+        const zoomIn = document.getElementById('zoomIn');
+        const zoomOut = document.getElementById('zoomOut');
+        const zoomReset = document.getElementById('zoomReset');
+
+        // Initialize app
+        async function init() {
+            try {
+                await loadSongsConfig();
+                if (songsConfig.length > 0) {
+                    createShuffledPlaylist();
+                    setupEventListeners();
+                    updateZoom();
+                    loadSong(0); // Load the first song in the shuffled playlist
+ adjustLyricsFontSize(); // Adjust lyrics font size after loading
+                    // Attempt to autoplay, but be mindful of browser restrictions
+                    const playPromise = audioPlayer.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.warn('Autoplay prevented:', error);
+                            // Show a message or a play button if autoplay fails
+                            playBtn.textContent = '▶'; // Ensure play button is visible
+                            isPlaying = false;
+                            // Optionally, display a message to the user asking them to click play
+                        });
+                    }
+                } else {
+ adjustLyricsFontSize(); // Adjust even if no songs, for initial state
+                     songTitle.textContent = "No Songs Found";
+                     songArtist.textContent = "";
+                     lyricsContent.innerHTML = '<div class="no-lyrics">No songs configured in songs.json</div>';
+                     // Disable controls if no songs
+                     playBtn.disabled = true;
+                     prevBtn.disabled = true;
+                     nextBtn.disabled = true;
+                     volumeSlider.disabled = true;
+                     progressBar.style.pointerEvents = 'none';
+                }
+            } catch (error) {
+                console.error('Failed to initialize app:', error);
+ adjustLyricsFontSize(); // Adjust even on error
+                songTitle.textContent = "Error Loading Songs";
+                songArtist.textContent = "Check console for details";
+                lyricsContent.innerHTML = `<div class="no-lyrics">Error loading songs: ${error.message}</div>`;
+                // Disable controls on error
+                playBtn.disabled = true;
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
+                volumeSlider.disabled = true;
+                progressBar.style.pointerEvents = 'none';
+            }
+        }
+
+        // Load songs configuration from songs.json
+        async function loadSongsConfig() {
+            try {
+                const response = await fetch('./songs.json', { mode: 'no-cors'});
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                songsConfig = await response.json();
+                console.log('Songs loaded from songs.json:', songsConfig);
+            } catch (error) {
+                console.error('Error loading songs.json:', error);
+                // Do not throw error here to allow fallback data or no-songs state
+                throw error; // Rethrow to be caught by init
+            }
+        }
+
+        function createShuffledPlaylist() {
+            // Create array of indices from 0 to songsConfig.length - 1
+            shuffledPlaylist = Array.from({length: songsConfig.length}, (_, i) => i);
+
+            // Fisher-Yates shuffle algorithm
+            for (let i = shuffledPlaylist.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledPlaylist[i], shuffledPlaylist[j]] = [shuffledPlaylist[j], shuffledPlaylist[i]];
+            }
+
+            console.log('Shuffled playlist order (indices):', shuffledPlaylist);
+        }
+
+        function setupEventListeners() {
+            // Audio controls
+            playBtn.addEventListener('click', togglePlay);
+            prevBtn.addEventListener('click', previousSong);
+            nextBtn.addEventListener('click', nextSong);
+
+            // Progress bar
+            progressBar.addEventListener('click', seek);
+
+            // Volume
+            volumeSlider.addEventListener('input', (e) => {
+                audioPlayer.volume = e.target.value / 100;
+            });
+
+            // Audio events
+            audioPlayer.addEventListener('timeupdate', updateProgress);
+            audioPlayer.addEventListener('loadedmetadata', updateDuration);
+            audioPlayer.addEventListener('ended', nextSong);
+            audioPlayer.addEventListener('play', () => {
+                isPlaying = true;
+                playBtn.textContent = '⏸';
+            });
+            audioPlayer.addEventListener('pause', () => {
+                isPlaying = false;
+                playBtn.textContent = '▶';
+            });
+            audioPlayer.addEventListener('error', (e) => {
+                console.error('Audio error:', audioPlayer.error, e);
+                 let errorMessage = 'Unknown audio error.';
+                 switch (audioPlayer.error.code) {
+                     case MediaError.MEDIA_ERR_ABORTED:
+                         errorMessage = 'Audio playback aborted.';
+                         break;
+                     case MediaError.MEDIA_ERR_NETWORK:
+                         errorMessage = 'A network error caused the audio download to fail.';
+                         break;
+                     case MediaError.MEDIA_ERR_DECODE:
+                         errorMessage = 'The audio playback was aborted due to a corruption problem or because the audio used features your browser did not support.';
+                         break;
+                     case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+                         errorMessage = 'The audio could not be loaded, either because the server or network failed or because the format is not supported.';
+                         break;
+                 }
+                alert(`Audio playback error: ${errorMessage} Please check the MP3 URL.`);
+                isPlaying = false;
+                playBtn.textContent = '▶';
+            });
+
+            // Zoom controls
+            zoomIn.addEventListener('click', () => changeZoom(2));
+            zoomOut.addEventListener('click', () => changeZoom(-2));
+            zoomReset.addEventListener('click', resetZoom);
+
+            // Auto-adjust lyrics font size on resize
+            window.addEventListener('resize', adjustLyricsFontSize);
+
+            // Set initial volume to 100%
+        }
+
+        function loadSong(playlistIndex) {
+            if (playlistIndex < 0 || playlistIndex >= shuffledPlaylist.length) {
+                 console.error("Invalid playlist index:", playlistIndex);
+                 return;
+            }
+
+            currentSongIndex = playlistIndex;
+            const actualSongIndex = shuffledPlaylist[playlistIndex];
+            const song = songsConfig[actualSongIndex];
+
+            // Update UI
+            songTitle.textContent = song.title;
+            songArtist.textContent = song.artist;
+
+            // Load audio
+            audioPlayer.src = song.mp3Url;
+            audioPlayer.load(); // Load the audio file
+
+            // Load lyrics
+            loadLyrics(song.lyricsFile);
+
+
+            // Reset play state indicator
+            isPlaying = false;
+            playBtn.textContent = '▶';
+             // Reset progress and time display
+            progress.style.width = '0%';
+            currentTime.textContent = '0:00';
+            duration.textContent = '0:00';
+        }
+
+
+
+        async function loadLyrics(lyricsFile) {
+            if (!lyricsFile) {
+                 lyricsContent.innerHTML = '<div class="no-lyrics">No lyrics file specified</div>';
+                 return;
+            }
+            try {
+                const response = await fetch(`./lyrics/${lyricsFile}`);
+                if (response.ok) {
+                    const lyrics = await response.text();
+                    // Simple newline to break conversion and replace backslashes
+                    lyricsContent.innerHTML = `<div>${lyrics.replace(/\\r\\n|\\n|\\r/g, '<br>')}</div>`;
+                } else {
+                    console.warn(`Lyrics file not found or failed to load: ./lyrics/${lyricsFile}`);
+                    lyricsContent.innerHTML = `<div class="no-lyrics">Lyrics not found for this song (${lyricsFile})</div>`;
+                }
+            } catch (error) {
+                console.error('Error fetching lyrics file:', error);
+                // Split lyrics by newline and wrap each line in a <p> tag
+                const lines = lyrics.split(/\r?\n/);
+                lyricsContent.innerHTML = lines.map(line => `<p>${line}</p>`).join('');
+            }
+        }
+
+        function togglePlay() {
+            if (currentSongIndex === -1 && shuffledPlaylist.length > 0) {
+                // If no song loaded yet, load the first one and try to play
+                loadSong(0);
+                // The play call will be attempted after loading metadata via event listener
+                 // or handled by the init function's autoplay attempt.
+                return;
+            }
+             if (currentSongIndex === -1) return; // No songs to play
+
+            if (isPlaying) {
+                audioPlayer.pause();
+            } else {
+                // Check if audio is ready to play
+                if (audioPlayer.readyState >= 2) { // Have enough data to play
+                     const playPromise = audioPlayer.play();
+                     if (playPromise !== undefined) {
+                         playPromise.then(() => {
+                             // Playback started successfully
+                         }).catch(error => {
+                             console.error('Error trying to play audio:', error);
+                              alert('Could not start playback. Please ensure browser allows autoplay or click play again.');
+                              playBtn.textContent = '▶';
+                              isPlaying = false;
+                         });
+                     }
+                } else {
+                    console.log("Audio not ready to play yet.");
+                    // Optionally show a loading indicator or message
+                }
+            }
+        }
+
+        function previousSong() {
+             if (shuffledPlaylist.length === 0) return; // No songs
+
+            const prevIndex = (currentSongIndex - 1 + shuffledPlaylist.length) % shuffledPlaylist.length;
+            loadSong(prevIndex);
+            // Attempt to play the previous song immediately after loading
+            const playPromise = audioPlayer.play();
+             if (playPromise !== undefined) {
+                 playPromise.catch(error => {
+                     console.warn('Autoplay of previous song prevented:', error);
+                     playBtn.textContent = '▶';
+                     isPlaying = false;
+                 });
+             }
+        }
+
+        function nextSong() {
+             if (shuffledPlaylist.length === 0) return; // No songs
+
+            const nextIndex = (currentSongIndex + 1) % shuffledPlaylist.length;
+            loadSong(nextIndex);
+             // Attempt to play the next song immediately after loading
+            const playPromise = audioPlayer.play();
+             if (playPromise !== undefined) {
+                 playPromise.catch(error => {
+                     console.warn('Autoplay of next song prevented:', error);
+                     playBtn.textContent = '▶';
+                     isPlaying = false;
+                 });
+             }
+        }
+
+        function seek(e) {
+            if (!audioPlayer.duration || currentSongIndex === -1) return;
+
+            const rect = progressBar.parentElement.getBoundingClientRect(); // Get parent for rotated element
+            const clickY = e.clientY - rect.top; // Y position within the container
+            const containerHeight = rect.height; // Height of the container
+
+             // Calculate percentage based on vertical position
+            const percent = clickY / containerHeight;
+            audioPlayer.currentTime = percent * audioPlayer.duration;
+        }
+
+
+        function updateProgress() {
+            if (audioPlayer.duration) {
+                const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                progress.style.width = `${percent}%`;
+                currentTime.textContent = formatTime(audioPlayer.currentTime);
+            }
+        }
+
+        function updateDuration() {
+            if (audioPlayer.duration) {
+                duration.textContent = formatTime(audioPlayer.duration);
+                 // Auto-play the first song after its metadata is loaded (important for some browsers)
+                 if (currentSongIndex === 0 && !isPlaying && audioPlayer.paused && audioPlayer.readyState >= 2) {
+                      const playPromise = audioPlayer.play();
+                      if (playPromise !== undefined) {
+                          playPromise.catch(error => {
+                              console.warn('Autoplay after metadata load prevented:', error);
+                               playBtn.textContent = '▶';
+                               isPlaying = false;
+                          });
+                      }
+                 }
+            }
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function changeZoom(delta) {
+            currentZoom = Math.max(10, Math.min(32, currentZoom + delta)); // Limit zoom range
+            updateZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 16; // Reset to base font size
+            updateZoom();
+        }
+
+        function updateZoom() {
+            lyricsContent.style.fontSize = `${currentZoom}px`;
+        }
+
+        // Function to adjust lyrics font size based on container height
+        function adjustLyricsFontSize() {
+            const lyricsHeight = lyricsContent.clientHeight;
+            const lineHeight = parseFloat(getComputedStyle(lyricsContent).lineHeight) || 1.6 * currentZoom; // Get actual line height or estimate
+            const estimatedLines = lyricsHeight / lineHeight;
+            const averageCharsPerLine = 50; // Estimate average characters per line
+            const estimatedChars = estimatedLines * averageCharsPerLine;
+            const contentArea = lyricsContent.clientWidth * lyricsHeight;
+
+            // This is a very basic estimation and might need tuning
+            currentZoom = Math.max(10, Math.min(32, Math.floor(Math.sqrt(contentArea / estimatedChars) * 0.8))); // Adjust formula as needed
+            updateZoom();
+        }
+        // Start the app
+        init();
+    </script>
+</body>
+</html>

@@ -1,14 +1,62 @@
 [
   {
-    "title": "අතීතයෙ මා",
-    "artist": "𝐊𝐚𝐬𝐮𝐧 𝐊𝐚𝐥𝐡𝐚𝐫𝐚",
-    "mp3Url": "https://songlk.sgp1.digitaloceanspaces.com/mp3/Atheethaye-Ma-Kasun-Kalhara-www.song.lk.mp3",
-    "lyricsFile": "song1_lyrics.txt"
-  },
-  {
     "title": "කැරකෙන රෝදේ",
     "artist": "එඩ්වඩ් ජයකොඩි",
     "mp3Url": "https://songlk.sgp1.digitaloceanspaces.com/mp3/Karakena%20Rode-Edward%20Jayakody-www.song.lk.mp3",
-    "lyricsFile": "song1.txt"
+    "lyricsFile": "lyrics-001.txt"
+  },
+  {
+    "title": "𝐀𝐭𝐡𝐞𝐞𝐭𝐡𝐚𝐲𝐞 𝐌𝐚a",
+    "artist": "𝐊𝐚𝐬𝐮𝐧 𝐊𝐚𝐥𝐡𝐚𝐫𝐚",
+    "mp3Url": "https://songlk.sgp1.digitaloceanspaces.com/mp3/Atheethaye-Ma-Kasun-Kalhara-www.song.lk.mp3",
+    "lyricsFile": "lyrics-002.txt"
+  },
+  {
+    "title": "සඳ පිණිදියේ",
+    "artist": "Rukantha Gunathilake",
+    "mp3Url": "https://songlk.sgp1.digitaloceanspaces.com/program/song/Sanda%20Pini%20Diye%20(Piyum%20Neela%20Vila)%20-%20Piyum%20Neela%20Vila%20with%20Rookantha%20Gunathilake%20[SONG.LK].mp3",
+    "lyricsFile": "lyrics-003.txt"
+  },
+  {
+    "title": "කැමීලියා මල් සුවඳට",
+    "artist": "Shahen Silva",
+    "mp3Url": "https://songlk.sgp1.digitaloceanspaces.com/mp3/Kameliya%20Mal%20(Cindarella)%20Lofi%20Version%20-%20Shahen%20Silva%20[SONG.LK].mp3",
+    "lyricsFile": "lyrics-004.txt"
+  },
+  {
+    "title": "රෑ තාරකාවෝ",
+    "artist": "Billy Fernando",
+    "mp3Url": "https://songlk.sgp1.digitaloceanspaces.com/mp3/Raa-Tharakawo-FoRTY2-2FORTY2-www.song.lk.mp3",
+    "lyricsFile": "lyrics-005.txt"
+  },
+  {
+    "title": "Malakuth Thibuna",
+    "artist": "Chitral & Umara",
+    "mp3Url": "https://song.sgp1.digitaloceanspaces.com/song/165/9570.mp3",
+    "lyricsFile": "lyrics-006.txt"
+  },
+  {
+    "title": "පොඩ්ඩියේ",
+    "artist": "Sadara Bandara",
+    "mp3Url": "https://songlk.sgp1.digitaloceanspaces.com/mp3/Poddiye-Sadara-Bandara-www.song.lk.mp3",
+    "lyricsFile": "lyrics-007.txt"
+  },
+  {
+    "title": "අනන්තයට යනවාමයි",
+    "artist": "Senaka Batagoda",
+    "mp3Url": "https://sinhanada.net/files/New%20Sinhala%20Mp3/Old%20New%20Sinhala%20mp3/Ananthayata%20Yanawamai%20(Sihina%20Mawannathi)%20-%20Senaka%20Batagoda.mp3",
+    "lyricsFile": "lyrics-008.txt"
+  },
+  {
+    "title": "අහසට සොඳුරුද සඳ කෙතරම්",
+    "artist": "Kashyapa | Nelu",
+    "mp3Url": "https://mp3.ananmanan.lk/sinhala_mp3/Nelu_Adikari_Ahasata_Sonduruda_Sanda.mp3",
+    "lyricsFile": "lyrics-009.txt"
+  },
+  {
+    "title": "චන්ද්‍රයන් පිදූ",
+    "artist": "Daddy",
+    "mp3Url": "https://song.sgp1.digitaloceanspaces.com/song/178/510.mp3",
+    "lyricsFile": "lyrics-010.txt"
   }
 ]
